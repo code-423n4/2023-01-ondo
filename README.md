@@ -292,7 +292,7 @@ contract Test_case_someDescription is BasicLendingMarket {
 ## Quickstart command
 Including this command may cut down on the number of build/test issues wardens ask about, and will let you point to a single command for them to try before attempting to debug a warden's build/test issue (☢️ do not include this explanation line if copying this section to your `README.md` ☢️)
 
-`export FORK_URL="<your-mainnet-rpc-url>" && rm -Rf 2023-01-ondo || true && gc https://github.com/code-423n4/2023-01-ondo.git -j8 --recurse-submodules && cd 2023-01-ondo && nvm install 16.0 && echo -e "FORGE_API_KEY_ETHEREUM = $FORK_URL\nETHEREUM_RPC_URL = \"$FORK_URL\"\nMNEMONIC='test test test test test test test test test test test junk'\nFORK_FROM_BLOCK_NUMBER=15958078" > .env && yarn install && foundryup && yarn init-repo && yarn test-forge --gas-report`
+`export FORK_URL="<your-mainnet-rpc-url>" && rm -Rf 2023-01-ondo || true && git clone https://github.com/code-423n4/2023-01-ondo.git --recurse-submodules && cd 2023-01-ondo && nvm install 16.0 && echo -e "FORGE_API_KEY_ETHEREUM = $FORK_URL\nETHEREUM_RPC_URL = \"$FORK_URL\"\nMNEMONIC='test test test test test test test test test test test junk'\nFORK_FROM_BLOCK_NUMBER=15958078" > .env && yarn install && foundryup && yarn init-repo && yarn test-forge --gas-report`
 
 
 ## VS Code
