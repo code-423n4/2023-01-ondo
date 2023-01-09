@@ -31,45 +31,45 @@ The directory structure of this repo splits the contracts, tests, and scripts ba
   - We utilize the Foundry framework for tests. Tests for both Cash and Flux can be found inside `forge-tests/`
   - We utilize the hardhat framework for scripting and deployments under `scripts/` and `deploy/`
 
-# Contest Scope
+## Scope
+### Files in scope
+|File|[SLOC](#nowhere "(nSLOC, SLOC, Lines)")|Description|
+|:-|:-:|:-|
+|_Contracts (19)_|
+|[contracts/cash/Proxy.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/Proxy.sol)|[9](#nowhere "(nSLOC:9, SLOC:9, Lines:26)")|Token Proxy contract for upgradeable Cash Tokens. Inherits from OZ's TransparentUpgradeableProxy|
+|[contracts/cash/token/Cash.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/token/Cash.sol) [🧮](#nowhere "Uses Hash-Functions")|[19](#nowhere "(nSLOC:15, SLOC:19, Lines:41)")|Upgradeable Cash token that checks the initiator of a transfer has the TRANSFER_ROLE|
+|[contracts/lending/tokens/cCash/CCashDelegate.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CCashDelegate.sol)|[24](#nowhere "(nSLOC:24, SLOC:24, Lines:50)")|Final deployed contract for CCash tokens. Inherits from CCash||
+|[contracts/lending/tokens/cToken/CTokenDelegate.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenDelegate.sol)|[24](#nowhere "(nSLOC:24, SLOC:24, Lines:50)")|Final deployed contract for fDAI token. Inherits from fDAI||
+|[contracts/cash/token/CashKYCSender.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/token/CashKYCSender.sol) [🧮](#nowhere "Uses Hash-Functions")|[49](#nowhere "(nSLOC:36, SLOC:49, Lines:76)")|Upgradeable Cash token that checks the initiator and sender of a transfer are KYC'd|
+|[contracts/lending/OndoPriceOracle.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/OndoPriceOracle.sol)|[50](#nowhere "(nSLOC:45, SLOC:50, Lines:126)")|Oracle used to determine prices of assets in lending market|
+|[contracts/cash/token/CashKYCSenderReceiver.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/token/CashKYCSenderReceiver.sol) [🧮](#nowhere "Uses Hash-Functions")|[55](#nowhere "(nSLOC:42, SLOC:55, Lines:84)")|Upgradeable Cash token that checks the initiator, sender, and receiver of a transfer are KYC'd|
+|[contracts/cash/factory/CashFactory.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/factory/CashFactory.sol) [💰](#nowhere "Payable Functions") [🧮](#nowhere "Uses Hash-Functions") [🌀](#nowhere "create/create2")|[73](#nowhere "(nSLOC:68, SLOC:73, Lines:155)")|Deploys an upgradeable Cash token. Permissions admin roles for the token and ProxyAdmin to the guardian|
+|[contracts/cash/factory/CashKYCSenderFactory.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/factory/CashKYCSenderFactory.sol) [💰](#nowhere "Payable Functions") [🧮](#nowhere "Uses Hash-Functions") [🌀](#nowhere "create/create2")|[87](#nowhere "(nSLOC:80, SLOC:87, Lines:169)")|Deploys an upgradeable CashKYCSender token. Permissions admin roles for the token and ProxyAdmin to the guardian|
+|[contracts/cash/factory/CashKYCSenderReceiverFactory.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/factory/CashKYCSenderReceiverFactory.sol) [💰](#nowhere "Payable Functions") [🧮](#nowhere "Uses Hash-Functions") [🌀](#nowhere "create/create2")|[87](#nowhere "(nSLOC:80, SLOC:87, Lines:169)")|Deploys an upgradeable CashKYCSenderReceiver token. Permissions admin roles for the token and ProxyAdmin to the guardian|
+|[contracts/lending/JumpRateModelV2.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/JumpRateModelV2.sol)|[103](#nowhere "(nSLOC:80, SLOC:103, Lines:191)")|Modified JumpRateModel contract with an updated blocks/year||
+|[contracts/cash/kyc/KYCRegistry.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/kyc/KYCRegistry.sol) [🧮](#nowhere "Uses Hash-Functions")|[112](#nowhere "(nSLOC:93, SLOC:112, Lines:243)")|Manages all KYC'd addresses that interact with Ondo protocol|
+|[contracts/lending/tokens/cCash/CCash.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CCash.sol) [🖥](#nowhere "Uses Assembly") [📤](#nowhere "Initiates ETH Value Transfer")|[142](#nowhere "(nSLOC:117, SLOC:142, Lines:275)")|CErc20 contract that inherits from and wraps an underlying CTokenCash contract into an ERC20 token||
+|[contracts/lending/tokens/cToken/CErc20.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CErc20.sol) [🖥](#nowhere "Uses Assembly") [📤](#nowhere "Initiates ETH Value Transfer")|[142](#nowhere "(nSLOC:117, SLOC:142, Lines:275)")|CErc20 contract that inherits from and wraps an underlying CTokenSanction contract into an ERC20 token||
+|[contracts/lending/OndoPriceOracleV2.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/OndoPriceOracleV2.sol)|[158](#nowhere "(nSLOC:137, SLOC:158, Lines:327)")|Oracle used to determine prices of additional assets in lending market|
+|[contracts/lending/tokens/cCash/CTokenInterfacesModifiedCash.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CTokenInterfacesModifiedCash.sol)|[196](#nowhere "(nSLOC:154, SLOC:196, Lines:459)")|Modified cToken interface that adds KYC-specific storage|
+|[contracts/lending/tokens/cToken/CTokenInterfacesModified.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenInterfacesModified.sol)|[196](#nowhere "(nSLOC:154, SLOC:196, Lines:457)")|Modified cToken interface that adds KYC-specific storage|
+|[contracts/cash/CashManager.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/CashManager.sol) [💰](#nowhere "Payable Functions") [🧮](#nowhere "Uses Hash-Functions")|[518](#nowhere "(nSLOC:427, SLOC:518, Lines:969)")|Main contract of Cash protocol that mints and burns Cash tokens to users|
+|[contracts/lending/tokens/cErc20ModifiedDelegator.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cErc20ModifiedDelegator.sol) [🖥](#nowhere "Uses Assembly") [💰](#nowhere "Payable Functions") [👥](#nowhere "DelegateCall")|[656](#nowhere "(nSLOC:495, SLOC:656, Lines:1272)")|Delegator (proxy) contract with KYC-specific storage for fDAIDelegate and CCashDelegate implementation contracts||
+|_Abstracts (5)_|
+|[contracts/cash/kyc/KYCRegistryClientConstructable.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/kyc/KYCRegistryClientConstructable.sol)|[9](#nowhere "(nSLOC:9, SLOC:9, Lines:40)")|Inherits from KYCRegistryClient and used by non-upgradeable KYC client contracts|
+|[contracts/cash/kyc/KYCRegistryClient.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/kyc/KYCRegistryClient.sol)|[23](#nowhere "(nSLOC:23, SLOC:23, Lines:68)")|Manages state for client contracts that interact with the KYCRegistry|
+|[contracts/cash/kyc/KYCRegistryClientInitializable.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/kyc/KYCRegistryClientInitializable.sol)|[24](#nowhere "(nSLOC:18, SLOC:24, Lines:65)")|Inherits from KYCRegistryClient and used by upgradeable KYC client contracts, such as Cash tokens|
+|[contracts/lending/tokens/cCash/CTokenCash.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CTokenCash.sol)|[687](#nowhere "(nSLOC:604, SLOC:687, Lines:1440)")|cToken contract that adds KYC checks to specific functions||
+|[contracts/lending/tokens/cToken/CTokenModified.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenModified.sol)|[690](#nowhere "(nSLOC:607, SLOC:690, Lines:1443)")|cToken contract that adds KYC/sanctions checks to specific functions||
+|_Interfaces (6)_|
+|[contracts/cash/interfaces/IKYCRegistry.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/interfaces/IKYCRegistry.sol)|[7](#nowhere "(nSLOC:4, SLOC:7, Lines:36)")|Interface for KYCRegistry||
+|[contracts/cash/interfaces/IMulticall.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/interfaces/IMulticall.sol) [💰](#nowhere "Payable Functions")|[11](#nowhere "(nSLOC:9, SLOC:11, Lines:51)")|Interface which, when implemented, allows a privileged actor to batch arbitrary calls from the CashManager||
+|[contracts/cash/interfaces/IKYCRegistryClient.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/interfaces/IKYCRegistryClient.sol)|[14](#nowhere "(nSLOC:14, SLOC:14, Lines:60)")|Interface for IKYCRegistryClient|
+|[contracts/lending/IOndoPriceOracle.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/IOndoPriceOracle.sol)|[20](#nowhere "(nSLOC:20, SLOC:20, Lines:67)")|Interface for OndoPriceOracle||
+|[contracts/lending/IOndoPriceOracleV2.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/IOndoPriceOracleV2.sol)|[55](#nowhere "(nSLOC:47, SLOC:55, Lines:138)")|Interface for OndoPriceOracleV2||
+|[contracts/cash/interfaces/ICashManager.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/interfaces/ICashManager.sol)|[125](#nowhere "(nSLOC:110, SLOC:125, Lines:360)")|Interface for CashManager||
+|Total (over 30 files):| [4365](#nowhere "(nSLOC:3662, SLOC:4365, Lines:9182)") ||
 
-The following Cash Protocol contracts are in scope for this contest
-| Name        | LOC         | Purpose     |
-| ----------- | ----------- | ----------- |
-| Proxy       | 9           | Token Proxy contract for upgradeable Cash Tokens. Inherits from OZ's TransparentUpgradeableProxy |
-| CashKYCSenderReceiver | 55 | Upgradeable Cash token that checks the initiator, sender, and receiver of a transfer are KYC'd |
-| CashKYCSenderReceiverFactory | 87       | Deploys an upgradeable CashKYCSenderReceiver token. Permissions admin roles for the token and ProxyAdmin to the guardian |
-| CashKYCSender | 49 | Upgradeable Cash token that checks the initiator and sender of a transfer are KYC'd |
-| CashKYCSenderFactory | 87 | Deploys an upgradeable CashKYCSender token. Permissions admin roles for the token and ProxyAdmin to the guardian |
-| Cash          | 19 | Upgradeable Cash token that checks the initiator of a transfer has the `TRANSFER_ROLE` |
-| CashFactory   | 73 | Deploys an upgradeable Cash token. Permissions admin roles for the token and ProxyAdmin to the guardian |
-| IMulticall    | 11 | Interface which, when implemented, allows a privileged actor to batch arbitrary calls from the CashManager |
-| CashManager   | 518        | Main contract of Cash protocol that mints and burns Cash tokens to users |
-| ICashManager  | 125        | Interface for CashManager |
-| KYCRegistry   | 112        | Manages all KYC'd addresses that interact with Ondo protocol |
-| IKYCRegistry  | 7          | Interface for KYCRegistry |
-| KYCRegistryClient | 23     | Manages state for client contracts that interact with the KYCRegistry |
-| IKYCRegistryClient | 14    | Interface for IKYCRegistryClient |
-| KYCRegistryClientConstructable | 9 | Inherits from KYCRegistryClient and used by non-upgradeable KYC client contracts |
-| KYCRegistryClientInitializable | 24 | Inherits from KYCRegistryClient and used by upgradeable KYC client contracts, such as Cash tokens|
-
-The following Flux Protocol contracts are in scope for this contest
-| Name        | LOC         | Purpose     |
-| ----------- | ----------- | ----------- |
-| CCashDelegate | 24        | Final deployed contract for CCash tokens. Inherits from CCash |
-| CCash       | 142         | CErc20 contract that inherits from and wraps an underlying CTokenCash contract into an ERC20 token |
-| CTokenCash   | 687         | cToken contract that adds KYC checks to specific functions |
-| CTokenInterfacesModifiedCash | 196 | Modified cToken interface that adds KYC-specific storage |
-| CTokenDelegate | 24        | Final deployed contract for fDAI token. Inherits from fDAI |
-| CErc20       | 142         | CErc20 contract that inherits from and wraps an underlying CTokenSanction contract into an ERC20 token |
-| CTokenModified  | 690         | cToken contract that adds KYC/sanctions checks to specific functions |
-| CTokenInterfacesModified | 196 | Modified cToken interface that adds KYC-specific storage |
-| cErc20ModifiedDelegator | 656 | Delegator (proxy) contract with KYC-specific storage for fDAIDelegate and CCashDelegate implementation contracts |
-| JumpRateModelV2 | 103 | Modified JumpRateModel contract with an updated blocks/year |
-| OndoPriceOracle | 50 | Oracle used to determine prices of assets in lending market |
-| IOndoPriceOracle | 20 | Interface for OndoPriceOracle |
-| OndoPriceOracleV2 | 158 | Oracle used to determine prices of additional assets in lending market |
-| IOndoPriceOracleV2 | 55 | Interface for OndoPriceOracleV2 |
 
 ## Interaction Diagram
 
@@ -120,7 +120,7 @@ Flux is a fork of Compound V2. The comptroller and contracts in the `contracts/l
 
 ## cToken (fDAI, fUSDT, fUSDC, fFRAX, fLUSD)
 
-Each of the upgradeable fToken contracts consists of 4 primary contracts: `CErc20DelegatorKYC` (Proxy), `CTokenDelegate` (Implementation), which inherits from `cTokenInterfacesModified`, and `CTokenModified`. These contracts are forked with minor changes from Compound's [on-chain cDAI contract](https://etherscan.io/token/0x5d3a536e4d6dbd6114cc1ead35777bab948e3643#code). `CTokenModified` and `cTokenInterfacesModified` are also forked from Compound's cDAI contract, but they add storage and logic for KYC/sanctions checks. In addition `cTokenInterfacesModified` changes the [`protocolSeizeShareMantissa`](contracts/lending/tokens/cToken/CTokenInterfacesModified.sol#L113) from 2.8% to 1.75%. `CTokenModified` guards the following functions with checks:
+Each of the upgradeable fToken contracts consists of 4 primary contracts: `CErc20DelegatorKYC` (Proxy), `CTokenDelegate` (Implementation), which inherits from `cTokenInterfacesModified`, and `CTokenModified`. These contracts are forked with minor changes from Compound's [on-chain cDAI contract](https://etherscan.io/token/0x5d3a536e4d6dbd6114cc1ead35777bab948e3643#code). `CTokenModified` and `cTokenInterfacesModified` are also forked from Compound's cDAI contract, but they add storage and logic for KYC/sanctions checks. In addition `cTokenInterfacesModified` changes the [`protocolSeizeShareMantissa`](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenInterfacesModified.sol#L113) from 2.8% to 1.75%. `CTokenModified` guards the following functions with checks:
 
 | Function        | Check    |
 | ----------- | -----------  |
@@ -133,7 +133,7 @@ Each of the upgradeable fToken contracts consists of 4 primary contracts: `CErc2
 
 *Note: `liquidateBorrow` has no checks on it since it calls into `seize` on the collateral and `repayBorrow` on the borrowed asset.*
 
-Since fTokens are clients of the KYCRegistry contract, the logic for KYC checks are added throughout various functions within the `CTokenModified` [contract](contracts/lending/tokens/cToken/CTokenModified.sol). The storage modifications for KYC/Sanctions checks are in `CTokenInterfacesModified` in this [section](contracts/lending/tokens/cToken/CTokenInterfacesModified.sol#L116-L176). The storage and logic is forked directly from `KYCRegistryClient`, without the use of custom errors.
+Since fTokens are clients of the KYCRegistry contract, the logic for KYC checks are added throughout various functions within the `CTokenModified` [contract](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenModified.sol). The storage modifications for KYC/Sanctions checks are in `CTokenInterfacesModified` in this [section](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cToken/CTokenInterfacesModified.sol#L116-L176). The storage and logic is forked directly from `KYCRegistryClient`, without the use of custom errors.
 
 ## cCASH
 
@@ -150,7 +150,7 @@ Like fTokens, the upgradeable cCash is forked from Compound's on-chain cDAI cont
 
 *Note: cCASH is not borrowable in the MVP, so the `borrow`, `repayBorrow`, and `liquidateBorrow` functions aren't relevant.*
 
-Similar to CTokenModified, the logic changes for cCash consist of checks on various functions in the `cTokenCash` [contract](contracts/lending/tokens/cCash/CTokenCash.sol). The storage changes modifications for KYC checks can be found in `CTokenInterfacesModifiedCash` in this [section](contracts/lending/tokens/cCash/CTokenInterfacesModifiedCash.sol#L118-L178).
+Similar to CTokenModified, the logic changes for cCash consist of checks on various functions in the `cTokenCash` [contract](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CTokenCash.sol). The storage changes modifications for KYC checks can be found in `CTokenInterfacesModifiedCash` in this [section](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/tokens/cCash/CTokenInterfacesModifiedCash.sol#L118-L178).
 
 ## cErc20ModifiedDelegator
 
@@ -158,7 +158,7 @@ This contract is forked from Compound's cDAI `cErc20Delegator` contract. Since t
 
 ## JumpRateModelV2
 
-The JumpRateModelV2 contract is forked from Compound's cDAI InterestRateModel. The only modified value is the [`blocksPerYear`](contracts/lending/JumpRateModelV2.sol#L29).
+The JumpRateModelV2 contract is forked from Compound's cDAI InterestRateModel. The only modified value is the [`blocksPerYear`](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/lending/JumpRateModelV2.sol#L29).
 
 ## OndoPriceOracle
 
@@ -197,7 +197,7 @@ Same assets/configuration as V1, with the following added:
 | FRAX | Yes | Yes | 0% |
 | LUSD | Yes | Yes | 0% |
 
-To support V2 Deployment assets, we must update the oracle and set the `OracleType` for all fTokens. A sample for how this will be done can be found [here](forge-tests/lending/fToken/fToken.base.noCollateral.t.sol#L279-L322).
+To support V2 Deployment assets, we must update the oracle and set the `OracleType` for all fTokens. A sample for how this will be done can be found [here](https://github.com/code-423n4/2023-01-ondo/blob/main/forge-tests/lending/fToken/fToken.base.noCollateral.t.sol#L279-L322).
 
 # Not In Scope
 
@@ -287,6 +287,17 @@ contract Test_case_someDescription is BasicLendingMarket {
 *Note*:
 - `BasicLendingMarket` inherits from `BasicDeployment`.
 - Within the foundry tests `address(this)` is given certain permissioned roles. Please use a freshly generated address when writing POC's related to bypassing access controls.
+
+
+## Quickstart command
+Including this command may cut down on the number of build/test issues wardens ask about, and will let you point to a single command for them to try before attempting to debug a warden's build/test issue (☢️ do not include this explanation line if copying this section to your `README.md` ☢️)
+
+`export FORK_URL="<your-mainnet-rpc-url>" && rm -Rf 2023-01-ondo || true && gc https://github.com/code-423n4/2023-01-ondo.git -j8 --recurse-submodules && cd 2023-01-ondo && nvm install 16.0 && echo -e "FORGE_API_KEY_ETHEREUM = $FORK_URL\nETHEREUM_RPC_URL = \"$FORK_URL\"\nMNEMONIC='test test test test test test test test test test test junk'\nFORK_FROM_BLOCK_NUMBER=15958078" > .env && yarn install && foundryup && yarn init-repo && yarn test-forge --gas-report`
+
+
+## VS Code
+CTRL+Click in Vs Code may not work due to usage of relative and absolute import paths.
+
 
 ## Polygon Deployment
 
