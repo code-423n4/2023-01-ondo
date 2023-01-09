@@ -1,0 +1,21 @@
+[profile.default]
+src = 'contracts'
+test = 'forge-tests'
+out = 'artifactsforge'
+cache = false
+gas_reports = ["CashManager", "CashFactory", "Cash", "CashKYCSenderFactory",
+"CashKYCSender", "CashKYCSenderReceiverFactory", "CashKYCSenderReceiver",
+"CashManager", "KYCRegistry", "KYCRegistryClient",
+"KYCRegistryClientConstructable", "KYCRegistryClientInitializable",
+"CCashDelegate", "CTokenDelegate", "CErc20DelegatorKYC", "OndoPriceOracle",
+"OndoPriceOracleV2"]
+lib = ['forge-tests/lib']
+remappings = [
+    'eth-gas-reporter/=node_modules/eth-gas-reporter/',
+    'forge-tests/=forge-tests',
+    'lib/=lib/'
+]
+fs_permissions = [{ access = "read", path = "./artifactsforge"}]
+libs = ["node_modules", "lib"]
+
+# See more config options https://github.com/gakonst/foundry/tree/master/config
