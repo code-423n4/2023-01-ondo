@@ -21,11 +21,9 @@
     "lint:fix-all": "prettier --write '**/*.(sol|json|js|ts)' '!lib/forge-std/**/*.(sol)' '!contracts/cash/external/**/*.(sol)' --ignore-path=.gitignore",
     "lint:fix": "pretty-quick --pattern '**/*.(sol|json|js|ts)' --staged --ignore-path=.gitignore --verbose",
     "test": "rm -rf build types .openzeppelin && export FORK_FROM_BLOCK_NUMBER=$(grep -w FORK_FROM_BLOCK_NUMBER .env | cut -d '=' -f2) && export CHAIN_ID=1 && hardhat test",
-    "test-ci": "rm -rf build types .openzeppelin & export CHAIN_ID=1 && hardhat test",
     "test-forge": "forge test --fork-url $(grep -w FORGE_API_KEY_ETHEREUM .env | cut -d '=' -f2) --fork-block-number $(grep -w FORK_FROM_BLOCK_NUMBER .env | cut -d '=' -f2)",
     "test-forge-lending": "forge test --fork-url $(grep -w FORGE_API_KEY_ETHEREUM .env | cut -d '=' -f2) --fork-block-number $(grep -w FORK_FROM_BLOCK_NUMBER .env | cut -d '=' -f2) --match-path forge-tests/lending/**/**/**/*.sol",
     "test-forge-cash": "forge test --fork-url $(grep -w FORGE_API_KEY_ETHEREUM .env | cut -d '=' -f2) --fork-block-number $(grep -w FORK_FROM_BLOCK_NUMBER .env | cut -d '=' -f2) --match-path forge-tests/cash/**/**/**/*.sol",
-    "test-forge-ci": "forge test --fork-url $FORGE_API_KEY_ETHEREUM --fork-block-number 15958078",
     "slither-check": "slither --solc-remaps @=node_modules/@",
     "deploy": "hardhat --network ethereum deploy"
   },
