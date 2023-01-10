@@ -74,7 +74,7 @@ While the files listed above are fully in-scope, note that many are forks of Com
 
 ## Interaction Diagram
 
-[Link to Slides](https://drive.google.com/file/d/1SACfMHUOMV7y_ta6IQqkdCgWUQDkFv6I/view?usp=sharing)
+[Link to Slides](https://drive.google.com/file/d/18cXjQaI2kA-YkAAHPwGTjBsIs5KWd3VM/)
 
 # CASH Contracts
 
