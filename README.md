@@ -70,7 +70,7 @@ The directory structure of this repo splits the contracts, tests, and scripts ba
 |[contracts/cash/interfaces/ICashManager.sol](https://github.com/code-423n4/2023-01-ondo/blob/main/contracts/cash/interfaces/ICashManager.sol)|[125](#nowhere "(nSLOC:110, SLOC:125, Lines:360)")|Interface for CashManager||
 |Total (over 30 files):| [4365](#nowhere "(nSLOC:3662, SLOC:4365, Lines:9182)") ||
 
-While the files listed above are fully in-scope, note that many are forks of Compound with minimal changes (see the description [below](https://github.com/code-423n4/2023-01-ondo/#flux-contracts) for the relevant commits).
+While the files listed above are fully in-scope for Medium and High findings, note that many are forks of Compound with minimal changes (see the description [below](https://github.com/code-423n4/2023-01-ondo/#flux-contracts) for the relevant commits, and for the scope of gas/QA findings in those files).
 
 ## Interaction Diagram
 
