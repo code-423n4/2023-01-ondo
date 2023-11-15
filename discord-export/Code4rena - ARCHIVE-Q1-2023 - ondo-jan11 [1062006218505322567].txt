@@ -1,0 +1,588 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q1-2023 / ondo-jan11
+==============================================================
+
+[01/09/2023 14:02] paroxysm9999 (pinned)
+👋 Hello and welcome to the contest channel for the $60,500 **Ondo Finance** contest!
+
+📆 Contest opens 01/11/2023 20:00 (20:00 UTC) and runs through 01/17/2023 20:00 (20:00 UTC) (6 days).
+
+Please give a warm welcome to the Ondo Finance team, particularly @ali2251, @tom2o17 🌊, @ypatil12 & @Cameron Clifton, who will be available for questions either here in the channel or via DM.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this contest, consider enabling notifications for this channel. 🐺 ⏰
+
+Contest Page: https://code4rena.com/contests/2023-01-ondo-finance-contest
+
+{Embed}
+https://code4rena.com/contests/2023-01-ondo-finance-contest
+Code4rena Ondo Finance contest
+$60,500 USDC
+11 January 2023—17 January 2023
+Code4rena - ARCHIVE-Q1-2023 - ondo-jan11 [1062006218505322567].txt_Files/C4-banner-7C19B.png
+
+{Reactions}
+🎉 (7) 
+
+[01/09/2023 14:09] paroxysm9999
+Pinned a message.
+
+
+[01/09/2023 19:50] justinbram
+hey all
+
+{Reactions}
+👋 (7) PU_peepoHappyWave (3) 
+
+[01/09/2023 19:59] gabrielbianconi
+:cowboypepe:
+
+{Reactions}
+ondo 
+
+[01/09/2023 19:59] codingnamekiki
+:PU_PepeBoom:
+
+
+[01/09/2023 20:32] mahdi9606
+is it a fork of compound 2 or 3 ?
+
+
+[01/09/2023 20:33] mahdi9606
+and is it public ?
+
+
+[01/09/2023 20:44] yash99
+Fork of CompoundV2
+
+
+[01/09/2023 20:44] yash99
+Repo is not public
+
+
+[01/09/2023 20:45] mahdi9606
+do you mean is it a private contest ?
+
+
+[01/09/2023 20:46] yash99
+No, contest is public. Our internal repo is private. The C4 repo itself will be public once contest has started
+
+{Reactions}
+👍 (2) 
+
+[01/11/2023 21:11] gkrastenov
+The c4audit output is not visible in the contest page.
+
+
+[01/11/2023 21:33] itsmetechjay
+Wardens, we've encountered some delays with the automated findings report for this contest. We'll update here as soon as possible, but we may not have an update for several hours. Apologies for the delay.
+
+
+[01/11/2023 22:00] yash99
+Hi Wardens! Excited to see what y'all find. Feel free to tag/dm any of us below with questions:
+@ali2251 @Cameron Clifton @tom2o17 🌊 @ypatil12
+
+{Reactions}
+🎉 (4) 
+
+[01/11/2023 22:33] itsmetechjay (pinned)
+Wardens, please note that the automated findings output has been posted and added to pinned posts. These are considered publicly known issues and are not eligible for awards.
+
+**Automated findings: **
+https://gist.github.com/iFrostizz/bbbadb3d93229f60c94f01b6626c056d
+
+
+[01/11/2023 22:33] itsmetechjay
+Pinned a message.
+
+
+[01/12/2023 09:38] _devblock VN#0095
+This is my first contest, can you guys wish me luck 👍
+
+{Reactions}
+👍 (13) 🥂 (3) 
+
+[01/12/2023 09:39] illilli000
+good luck!
+
+
+[01/12/2023 09:49] koolexc
+good luck!
+
+
+[01/12/2023 11:33] delvir0
+External account and admin are EOA's?  If yes, are they manualy updating the price every epoch (~6min)?
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - ondo-jan11 [1062006218505322567].txt_Files/image-74D36.png
+
+
+[01/12/2023 18:14] mahdi9606
+I followed instructions for installing but I face this error when testing
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - ondo-jan11 [1062006218505322567].txt_Files/Screenshot_145-6D43D.png
+
+
+[01/12/2023 18:22] mahdi9606
+and what's the difference between forge test and yarn test-forge
+
+
+[01/12/2023 18:23] mahdi9606
+forge test worked for me
+
+
+[01/12/2023 18:23] tom2o17#1279
+Yes EOA/msig will update price w/n cashManager, Epoch is set to 1 day for cash plz see L154 in `forge-tests/cash/BasicDeployment.sol`
+
+
+[01/12/2023 18:26] tom2o17#1279
+`yarn test-forge` runs a script in package.json.
+
+` "test-forge": "forge test --fork-url $(grep -w FORGE_API_KEY_ETHEREUM .env | cut -d '=' -f2) --fork-block-number $(grep -w FORK_FROM_BLOCK_NUMBER .env | cut -d '=' -f2)",`
+
+{Reactions}
+👍 
+
+[01/12/2023 18:26] tom2o17#1279
+You will need to specify the API key w/n the `.env` to run w/ `yarn test-forge`
+
+
+[01/12/2023 18:27] tom2o17#1279
+Good luck!
+
+
+[01/13/2023 13:30] .nalus
+Hey got a question @tom2o17 🌊 . How will the MANAGER_ADMIN get all the info to execute transaction correctly? For example how does he know which users want redeem and which refund of their tokens and which users he has to include in completeRedemptions call in the first place?
+
+
+[01/13/2023 17:17] Cameron Clifton#0336
+Hi Nalus, 
+For redemptions, the manager admin will have access to off chain accounting systems for calculating the correct exchange rate of CASH->USDC for redemptions.
+
+For determining who to include in the `completeRedemptions` call, the manager admin can look at all the withdrawal requests and their respective quantities in the `redemptionInfoPerEpoch` mapping  in CashManager.sol.  
+
+As for refunds, we imagine this case will be really rare, but we have added the ability to simply refund someone the amount of CASH token they “requested redemption” for for any unforeseen situations where there is some legal reason we are unable to grant the redemption request at that time. 
+
+Does that help answer your question?
+
+{Reactions}
+👍 (3) thankyou (2) 
+
+[01/14/2023 10:54] jaraxxus775
+hi, how long does an epoch duration last?
+
+
+[01/14/2023 18:04] acegawd
+@ali2251 @tom2o17 🌊 @ypatil12 @Cameron Clifton who's available for a DM?
+
+
+[01/14/2023 18:25] Cameron Clifton#0336
+Hi the epoch duration can be set by an account with the MANAGER_ADMIN role.
+
+
+[01/14/2023 19:14] tom2o17#1279
+🙋‍♂️
+
+{Reactions}
+👍 
+
+[01/15/2023 02:02] CharlesPal#0309
+Really clean codebase so far …
+
+{Reactions}
+🙌 (8) yeoooo (4) 5692siuuuu (4) hi5 (2) 
+
+[01/15/2023 16:08] CharlesPal#0309
+Is there a specific reason why the assetSender is used? Why not just transfer it back from the assetRecipient?
+
+
+[01/15/2023 19:33] horsefacts
+There's a reference to `"fETH"` here in the `CompoundLens` contract, but as far as I can tell, there's no Ondo equivalent of Compound `CEther`, is that right?
+
+https://github.com/code-423n4/2023-01-ondo/blob/f3426e5b6b4561e09460b2e6471eb694efdd6c70/contracts/lending/CompoundLens.sol#L53
+
+
+[01/15/2023 19:57] tom2o17#1279
+This was done to allow for the possibility of using two different addresses for assets, one to handle outbound and one for handling inbound assets.
+
+
+[01/15/2023 19:57] tom2o17#1279
+Currently there is no ondo equivalent of `CEther`, but it might be something we create/support down the line.
+
+{Reactions}
+👍 (3) 
+
+[01/15/2023 21:23] CharlesPal#0309
+Okay and you’re going to transfer assets between these two internally?
+
+
+[01/15/2023 21:56] tom2o17#1279
+Yes, Flow of `collateral`/underlying will be:
+minting: `user` --> `AssetRecipient`  --> Brokerage 
+redemption: Brokerage --> `AssetSender` --> `user`
+
+
+[01/16/2023 15:20] 3dgeville#0311
+heyy who can I DM for a question?
+
+
+[01/16/2023 18:39] yash99
+👋
+
+{Reactions}
+🔥 
+
+[01/17/2023 11:46] codingnamekiki
+is anyone from the sponsors online?
+
+{Reactions}
+🙋 
+
+[01/17/2023 11:56] codingnamekiki
+:pepemcdonalds:
+
+{Reactions}
+same 
+
+[01/17/2023 14:43] tom2o17#1279
+🙋
+
+
+[01/17/2023 14:43] codingnamekiki
+:chefskiss:
+
+
+[01/17/2023 18:00] tom2o17#1279
+Hey just wanted to push a PSA since I have been getting a fair amount of questions re if `completeWithdrawal` can be called more than once w/n an epoch. 
+
+The short answer is yes it can be called multiple times per epoch. 
+
+This [splitting up the calls] should be done if the gas consumed would be gt the block gas limit [~ 150 users `requestingRedemptions` w/n an epoch]. The Flow for this would look similar to the image attached.
+
+{Attachments}
+Code4rena - ARCHIVE-Q1-2023 - ondo-jan11 [1062006218505322567].txt_Files/Screenshot_2023-01-17_at_12.57.34_PM-1AED1.png
+
+
+[01/17/2023 20:02] C4
+**🚨 CONTEST ALERT**
+
+@🐺wardens The **Ondo Finance** contest is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the contest is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a gardener if you have questions along the way!
+
+{Reactions}
+🙌 (6) 
+
+[01/17/2023 20:02] chaduke3730
+good luck to all!
+
+
+[01/17/2023 20:02] chaduke3730
+at least I participated
+
+{Reactions}
+🙌 (16) 
+
+[02/03/2023 23:14] abuzay#1524
+Any update ?
+
+
+[02/04/2023 12:06] trust90
+Judging finished, expect awards next week
+
+{Reactions}
+👏 (8) 🫡 (3) hi5 
+
+[02/04/2023 12:08] un_for_given
+Fast & Furious
+
+
+[02/04/2023 12:08] codingnamekiki
+:PU_FeelsWowMan:
+
+
+[02/05/2023 08:54] road220
+300 submissions within a day...)
+
+
+[02/05/2023 17:08] praise95
+how do u know this info? is there some place one could check?
+
+
+[02/05/2023 19:57] road220
+check out the recent interview with Trust on youtube
+
+
+[02/05/2023 21:09] praise95
+okay:hi5:
+
+
+[02/08/2023 03:11] akshaysrivastav
+👀
+
+
+[02/08/2023 05:53] mahdi9606
+👀
+
+
+[02/08/2023 12:15] xyzbtchunt
+@Trust  any update?
+
+
+[02/08/2023 12:20] trust90
+soon
+
+{Reactions}
+👍 (5) 
+
+[02/08/2023 18:13] itsmetechjay
+:C4Keycap:  💸 🎉 Awards for **Ondo Finance**:
+
+$11,205.52 USDC » @AkshaySrivastav 
+$7,517.41 USDC » @hansfriese 
+$5,956.16 USDC » @bin2chen 
+$3,616.11 USDC » @adriro 
+$2,821.71 USDC » @zaskoh 
+$2,658.24 USDC » @chaduke 
+$2,553.36 USDC » @peanuts 
+$2,517.13 USDC » @cccz 
+$2,517.13 USDC » @minhquanym 
+$735.46 USDC » @Rolezn 
+$735.46 USDC » @RaymondFam 
+$735.46 USDC » @0xSmartContract 
+$560.14 USDC » @c3phas 
+$395.96 USDC » @Kiki 
+$336.94 USDC » @IllIllI 
+$336.94 USDC » @code-cipher 
+$311.49 USDC » @gzeon 
+$311.49 USDC » @rbserver 
+$311.49 USDC » @Tajobin 
+$311.49 USDC » @csanuragjain 
+$304.58 USDC » @btk 
+$304.58 USDC » @Josiah  
+$304.58 USDC » @Udsen  
+$304.58 USDC » @joestakey 
+$275.25 USDC » @immeas 
+$173.86 USDC » @bauer6009 
+$137.62 USDC » @0xjuicer 
+$68.60 USDC » @cygaar 
+$68.60 USDC » @Bnke 
+$68.60 USDC » @arialblack14 
+$68.60 USDC » @descharre 
+$68.60 USDC » @ICP 
+$68.60 USDC » @tsvetanovv 
+$68.60 USDC » @0x1f8b 
+$68.60 USDC » @Viktor_Cortess  
+$36.24 USDC » @thinklab 
+$36.24 USDC » @0xSurena 
+$36.24 USDC » @koxuan 
+$36.24 USDC » @2997ms 
+$36.24 USDC » scokaf (@Scoon, @jauvany)
+$36.24 USDC » @chrisdior4 
+$36.24 USDC » @DefSec 
+$36.24 USDC » @shark 
+$36.24 USDC » @Deekshith99 
+$36.24 USDC » @horsefacts 
+$36.24 USDC » @tsar 
+$36.24 USDC » @EricTee 
+$36.24 USDC » @0xkato 
+$36.24 USDC » @0x5rings 
+$36.24 USDC » @tnevler 
+$36.24 USDC » @CharlesPal 
+$36.24 USDC » @nicobevi.eth 
+$36.24 USDC » BClabs (@nalus, @Reptilia)
+$36.24 USDC » @lukris02 
+$36.24 USDC » @0xcm 
+$36.24 USDC » @cryptphi 
+$36.24 USDC » @0x52 
+$36.24 USDC » BPZ (pa6221, @Bitcoinfever244, @PrasadLak)
+$36.24 USDC » @Kaysoft 
+$36.24 USDC » @0xAgro 
+$36.24 USDC » @luxartvinsec 
+$32.36 USDC » @Sathish9098 
+$32.36 USDC » @eyexploit 
+$32.36 USDC » @saneryee 
+$32.36 USDC » @Diana 
+$32.36 USDC » @dharma09 
+$32.36 USDC » @cryptostellar5 
+$32.36 USDC » @gkrastenov 
+$32.36 USDC » SleepingBugs (@Deivitto, @0xLovesleep)
+
+🏁 Findings summary
+---------------------------
+High risk findings: 5 total, 1 unique
+Med risk findings: 15 total, 5 unique
+Gas reports: 24
+QA reports: 54 
+
+Awards will be distributed on Polygon within the next week. Congratulations, everyone! 💸 💸 💸
+
+*If you participated in this contest and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions. *
+
+{Reactions}
+🎉 (10) C4Keycap (4) 
+
+[02/08/2023 18:14] eyexploit
+noice:hi5:
+
+
+[02/08/2023 18:20] chaduke3730
+congtrats to all!
+
+{Reactions}
+hi5 (3) 🎉 (2) 
+
+[02/08/2023 18:20] viktor_cortess
+My first payment for my first audit
+
+{Reactions}
+🎉 (5) 
+
+[02/08/2023 18:22] chaduke3730
+@Viktor_CortessThat is a big number to get started!
+
+
+[02/08/2023 18:22] chaduke3730
+Cheers
+
+{Reactions}
+👍 
+
+[02/08/2023 18:35] ladboy233
+👍
+
+
+[02/08/2023 18:40] cvetanovv
+My first award in C4 🎉
+
+{Reactions}
+hi5 (10) 
+
+[02/08/2023 18:50] cloudellie
+Congratulations!
+
+
+[02/08/2023 18:53] Ding#0802
+My first award in C4 too and I think this is a big motivation for me work✨ 💰  my way to the top.:C4Keycap:
+
+{Reactions}
+hi5 (10) 🙌 
+
+[02/08/2023 19:30] cloudellie
+Congratulations, and thanks for participating!
+
+{Reactions}
+hi5 (3) 
+
+[02/08/2023 20:33] dadekuma
+found a medium but I'm not in the list 😢 does that mean that it's probably invalid?
+
+
+[02/08/2023 21:02] mahdi9606
+Me too
+
+
+[02/08/2023 22:22] praise95
+congrats @chaduke :hi5:
+
+
+[02/09/2023 00:27] chaduke3730
+@praiseThanks
+
+{Reactions}
+🫡 
+
+[02/09/2023 02:34] akshaysrivastav
+Congratulations everyone 🎉
+
+{Reactions}
+🎉 (12) 
+
+[02/09/2023 02:35] .satyam_
+Congrats @AkshaySrivastav 👏👏👏
+
+
+[02/09/2023 02:37] akshaysrivastav
+Thanks @Satyam_Sharma
+
+
+[02/09/2023 02:37] akshaysrivastav
+I am glad I was able to help Ondo team
+
+{Reactions}
+🔥 (13) 
+
+[02/09/2023 14:16] eyexploit
+wen reports?
+
+
+[02/09/2023 15:29] prcolaco
+yeah, me too... looking forward to check the repo to see where I failed... hope to do better on next ones! 🤙
+
+
+[02/09/2023 22:42] rageur_
+Hi all, I found a lot of gas report for this audit but curiously not in the award list. Is it possible all of them are wrong or did I make any mistakes ?
+
+
+[02/10/2023 07:01] luxartvinsec#6243
+Hi @🦖 eric (ninek) | C4, U said rewards sent as well but I cant see my rewards in my wallet. Anyone else have this problem?
+
+
+[02/10/2023 07:05] 0xl3xx
+Hi, @luxartvinsec. It says rewards will be distributed within next week.
+
+
+[02/10/2023 07:06] luxartvinsec#6243
+Aah okay this is my first reward. Thanks🎉
+
+
+[02/10/2023 07:13] deekshith09
+Rewards already sent
+
+
+[02/10/2023 07:26] luxartvinsec#6243
+🧐
+
+
+[02/10/2023 08:15] monrel
+@luxartvinsec  are you checking on Polygon?
+
+
+[02/10/2023 08:19] luxartvinsec#6243
+Yes, but cant see
+
+
+[02/10/2023 14:59] 0xl3xx
+Hmm, yeah I haven't received anything either.
+
+
+[02/10/2023 15:07] mahdi9606
+When report comes out ?
+
+
+[02/10/2023 15:08] itsmetechjay
+If you haven't received your payment, please open a help desk requests and we can take a look: https://code4rena.com/help
+
+{Embed}
+https://code4rena.com/help
+Help | Code 423n4
+Need help with something? Contact us here.
+Code4rena - ARCHIVE-Q1-2023 - ondo-jan11 [1062006218505322567].txt_Files/C4-banner-7C19B.png
+
+{Reactions}
+👍 
+
+[02/10/2023 16:22] 0xl3xx
+Although I submitted a request, there seems to be an issue with metamask/brave. It shows up alright on polygonscan , so nothing to do with c4. Thanks
+
+
+[02/10/2023 16:29] itsmetechjay
+Oh ok sounds good. We'll close your ticket.  Hope you metamask issue is fixed soon.
+
+{Reactions}
+✅ 
+
+==============================================================
+Exported 96 message(s)
+==============================================================
